@@ -1,1 +1,61 @@
+##explication de activité 3.1
+__explication de la classe serveur__
+while(true){
+            Socket s=sr.accept();
+            System.out.println(s.getRemoteSocketAddress());
+            clientproc p=new clientproc(s);
+            p.start();
+            //ouvrir le flux de communication
+            OutputStream o=s.getOutputStream();
+            //ouvrir le flux de de triement
+            o.write(clientproc.nbclient);
+
+        }
+=>chaque client envoie une requéte on lui donner une class clientproc pour lui gérrer un thread qui sont gérés par le JVM
+et on a utuliser les flux de traitement et les flux de commnication pour assurer l'envoie et la reception de nombre de client.
+l'adreese de client qui envoie une requéte est affiché a l'aide de de methode getRemoteSocketAddress()
+###########################################################################################
+__explication de la classe clientproc__
+package ACT3_1;
+import java.net.Socket;
+public class clientproc extends Thread{
+    Socket s;
+    public static int nbclient;
+    public clientproc(Socket s){
+        nbclient++;
+        this.s=s;
+
+    }
+    public void run(){
+        System.out.println("je suis client numéro:"+clientproc.nbclient);
+
+    }
+
+}
+=>la classe clientproc est une classe qui hérite de la classe thread elle a un attribut de type Socket et un attribut static qui s'incrémente a chaque demande au servuerou a chaque instance
+de la classe clientproc 
+#####################################################################################################
+__explication de la classe client__
+package ACT3_1;
+
+import java.io.InputStream;
+import java.net.*;
+
+public class client {
+
+    public static void main(String[] args) throws Exception{
+        //la création de socket coté client
+        Socket c=new Socket("localhost",1234);
+        System.out.println("je suis connecté");
+        //ouvrir le flux de communication
+        InputStream in=c.getInputStream();
+        //ouvrir le flux de triement
+        int nb=in.read();
+        //affichier le numéro propre de client
+        System.out.println("mon numéro de traitement coté serveur est :"+nb);
+
+
+    }
+}
+=>l'instansiation de de Socket client qui va se communiquer avec le serveur et l'utulisation de flux de communication et le flux de traitement pour recevoir le nombre de client
 
