@@ -7,6 +7,7 @@ import java.net.Socket;
 
 public class serveur {
     public static void main(String[] args) throws IOException {
+
         //la création de la socket servuer
         ServerSocket sr=new ServerSocket(1234);
         System.out.println("le servuer commence a accepter des clients...");

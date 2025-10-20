@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.net.*;
 
 public class client {
+
     public static void main(String[] args) throws Exception{
         //la création de socket coté client
         Socket c=new Socket("localhost",1234);
