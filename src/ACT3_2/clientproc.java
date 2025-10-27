@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class clientproc extends Thread {
     static int nbop=0;
     Socket s;
+    private static final Object verrou=new Object();
 
     public clientproc(Socket s) {
         this.s = s;
@@ -44,7 +45,9 @@ public class clientproc extends Thread {
             OutputStream out1 = s.getOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(out1);
             oos.writeObject(opr);
-            nbop++;
+           synchronized (verrou) {
+               nbop++;
+           }
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
