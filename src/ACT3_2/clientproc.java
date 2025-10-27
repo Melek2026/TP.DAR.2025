@@ -48,6 +48,7 @@ public class clientproc extends Thread {
            synchronized (verrou) {
                nbop++;
            }
+           System.out.println("");
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
