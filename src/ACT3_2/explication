@@ -78,4 +78,52 @@ Pensez à modifier l'adresse IP dans client.java selon votre configuration rése
 Le serveur doit être démarré avant les clients.
 
 Le compteur nbop est statique et partagé entre tous les threads.
+--le sychronized
+🌟 Le Contexte
+
+Tu as une classe clientproc qui hérite de Thread.
+Donc plusieurs threads (clients) peuvent s’exécuter en même temps, chacun traitant une requête (une opération).
+
+Le champ suivant est partagé entre tous les threads :
+
+static int nbop = 0;
+
+
+Cela signifie que tous les threads voient et modifient la même variable nbop.
+
+⚠️ Le problème sans synchronized
+
+Si plusieurs threads exécutent cette partie en même temps :
+
+nbop++;
+
+
+alors :
+
+Thread 1 lit nbop (par exemple 5)
+
+Thread 2 lit aussi nbop (toujours 5)
+
+Thread 1 ajoute 1 → met 6
+
+Thread 2 ajoute 1 → met aussi 6 ❌
+➜ le compteur aurait dû être 7, mais il reste 6 (perte d’incrémentation)
+
+C’est ce qu’on appelle un problème de concurrence (race condition).
+
+✅ L’effet de synchronized
+
+La ligne suivante :
+
+synchronized (verrou) {
+    nbop++;
+}
+
+
+signifie :
+
+“Pendant que ce thread est dans ce bloc, aucun autre thread ne peut utiliser le même objet verrou en synchronized.”
+
+Autrement dit, un seul thread à la fois peut exécuter le bloc de code protégé.
+Ainsi, nbop++ se fait de manière atomique (sécurisée).
 
