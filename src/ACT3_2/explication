@@ -1,0 +1,81 @@
+🧮 Serveur Multithread de Calcul - Projet Java
+Ce projet implémente un serveur multithread en Java permettant à plusieurs clients de se connecter simultanément pour effectuer des opérations mathématiques simples.
+
+📁 Structure du projet
+🧩 Classes principales
+1. serveurMultithread.java
+Classe principale du serveur.
+
+Écoute sur le port 1234.
+
+Accepte les connexions clientes et lance un thread (clientproc) pour chaque client.
+
+Affiche le nombre total d'opérations effectuées.
+
+2. client.java
+Classe cliente.
+
+Se connecte au serveur (adresse IP : 192.168.1.15, port : 1234).
+
+Saisit deux opérandes et un opérateur via la console.
+
+Envoie un objet operation au serveur et affiche le résultat.
+
+3. clientproc.java
+Thread gérant chaque client connecté.
+
+Reçoit un objet operation, effectue le calcul et renvoie le résultat.
+
+Met à jour un compteur global d'opérations (nbop).
+
+4. operation.java
+Classe sérialisable représentant une opération mathématique.
+
+Contient :
+
+Deux opérandes (opd1, opd2)
+
+Un opérateur (op)
+
+Un résultat (res)
+
+Méthodes de calcul : somme(), soustraction(), multiplication(), division().
+
+🚀 Fonctionnalités
+✅ Connexions clientes multiples
+
+✅ Opérations supportées : +, -, *, /
+
+✅ Gestion des erreurs (division par zéro, opérateur invalide)
+
+✅ Communication via sockets et sérialisation d'objets
+
+🛠️ Technologies utilisées
+Java SE
+
+Sockets TCP
+
+Multithreading
+
+Sérialisation d'objets
+
+▶️ Comment exécuter
+Compiler tous les fichiers .java :
+
+bash
+javac ACT3_2/*.java
+Lancer le serveur :
+
+bash
+java ACT3_2.serveurMultithread
+Lancer un ou plusieurs clients :
+
+bash
+java ACT3_2.client
+📌 Notes
+Pensez à modifier l'adresse IP dans client.java selon votre configuration réseau.
+
+Le serveur doit être démarré avant les clients.
+
+Le compteur nbop est statique et partagé entre tous les threads.
+
