@@ -1,0 +1,129 @@
+🧮 Serveur Multithread de Calcul - Projet Java
+Ce projet implémente un serveur multithread en Java permettant à plusieurs clients de se connecter simultanément pour effectuer des opérations mathématiques simples.
+
+📁 Structure du projet
+🧩 Classes principales
+1. serveurMultithread.java
+Classe principale du serveur.
+
+Écoute sur le port 1234.
+
+Accepte les connexions clientes et lance un thread (clientproc) pour chaque client.
+
+Affiche le nombre total d'opérations effectuées.
+
+2. client.java
+Classe cliente.
+
+Se connecte au serveur (adresse IP : 192.168.1.15, port : 1234).
+
+Saisit deux opérandes et un opérateur via la console.
+
+Envoie un objet operation au serveur et affiche le résultat.
+
+3. clientproc.java
+Thread gérant chaque client connecté.
+
+Reçoit un objet operation, effectue le calcul et renvoie le résultat.
+
+Met à jour un compteur global d'opérations (nbop).
+
+4. operation.java
+Classe sérialisable représentant une opération mathématique.
+
+Contient :
+
+Deux opérandes (opd1, opd2)
+
+Un opérateur (op)
+
+Un résultat (res)
+
+Méthodes de calcul : somme(), soustraction(), multiplication(), division().
+
+🚀 Fonctionnalités
+✅ Connexions clientes multiples
+
+✅ Opérations supportées : +, -, *, /
+
+✅ Gestion des erreurs (division par zéro, opérateur invalide)
+
+✅ Communication via sockets et sérialisation d'objets
+
+🛠️ Technologies utilisées
+Java SE
+
+Sockets TCP
+
+Multithreading
+
+Sérialisation d'objets
+
+▶️ Comment exécuter
+Compiler tous les fichiers .java :
+
+bash
+javac ACT3_2/*.java
+Lancer le serveur :
+
+bash
+java ACT3_2.serveurMultithread
+Lancer un ou plusieurs clients :
+
+bash
+java ACT3_2.client
+📌 Notes
+Pensez à modifier l'adresse IP dans client.java selon votre configuration réseau.
+
+Le serveur doit être démarré avant les clients.
+
+Le compteur nbop est statique et partagé entre tous les threads.
+--le sychronized
+🌟 Le Contexte
+
+Tu as une classe clientproc qui hérite de Thread.
+Donc plusieurs threads (clients) peuvent s’exécuter en même temps, chacun traitant une requête (une opération).
+
+Le champ suivant est partagé entre tous les threads :
+
+static int nbop = 0;
+
+
+Cela signifie que tous les threads voient et modifient la même variable nbop.
+
+⚠️ Le problème sans synchronized
+
+Si plusieurs threads exécutent cette partie en même temps :
+
+nbop++;
+
+
+alors :
+
+Thread 1 lit nbop (par exemple 5)
+
+Thread 2 lit aussi nbop (toujours 5)
+
+Thread 1 ajoute 1 → met 6
+
+Thread 2 ajoute 1 → met aussi 6 ❌
+➜ le compteur aurait dû être 7, mais il reste 6 (perte d’incrémentation)
+
+C’est ce qu’on appelle un problème de concurrence (race condition).
+
+✅ L’effet de synchronized
+
+La ligne suivante :
+
+synchronized (verrou) {
+    nbop++;
+}
+
+
+signifie :
+
+“Pendant que ce thread est dans ce bloc, aucun autre thread ne peut utiliser le même objet verrou en synchronized.”
+
+Autrement dit, un seul thread à la fois peut exécuter le bloc de code protégé.
+Ainsi, nbop++ se fait de manière atomique (sécurisée).
+
