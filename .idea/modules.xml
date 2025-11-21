@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/TP6.1.iml" filepath="$PROJECT_DIR$/.idea/TP6.1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TP6_RMI/TP6_RMI.iml" filepath="$PROJECT_DIR$/TP6_RMI/TP6_RMI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TP6_RMI_CLIENT/TP6_RMI_CLIENT.iml" filepath="$PROJECT_DIR$/TP6_RMI_CLIENT/TP6_RMI_CLIENT.iml" />
+    </modules>
+  </component>
+</project>

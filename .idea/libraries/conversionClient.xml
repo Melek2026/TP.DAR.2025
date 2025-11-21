@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="conversionClient">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/TP6_RMI_CLIENT/lib/conversionClient.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
